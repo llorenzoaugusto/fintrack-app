@@ -1,13 +1,13 @@
 import React, { useState, useMemo } from 'react';
-import { InvestmentTransaction, InvestmentTransactionType, AssetAllocation } from '../types'; // Using FundContribution and FinancialGoal for underlying data for now
-import { useLocalStorage } from '../hooks/useLocalStorage';
-import Button from '../components/Button';
-import Input from '../components/Input';
-import Modal from '../components/Modal';
-import Select from '../components/Select';
+import { InvestmentTransaction, InvestmentTransactionType, AssetAllocation } from '@/types'; // Using FundContribution and FinancialGoal for underlying data for now
+import { useLocalStorage } from '@/hooks/useLocalStorage';
+import Button from '@/components/Button';
+import Input from '@/components/Input';
+import Modal from '@/components/Modal';
+import Select from '@/components/Select';
 import { AreaChart, Area, LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, Cell, PieChart, Pie } from 'recharts';
-import { CURRENCY_SYMBOL, FINTRACK_TEXT_COLOR_PRIMARY, FINTRACK_TEXT_COLOR_SECONDARY, FINTRACK_TEXT_COLOR_MUTED, FINTRACK_BORDER_COLOR, CHART_COLORS } from '../constants';
-import { formatDisplayDate } from '../utils/dateUtils';
+import { CURRENCY_SYMBOL, FINTRACK_TEXT_COLOR_PRIMARY, FINTRACK_TEXT_COLOR_SECONDARY, FINTRACK_TEXT_COLOR_MUTED, FINTRACK_BORDER_COLOR, CHART_COLORS } from '@/constants';
+import { formatDisplayDate } from '@/utils/dateUtils';
 
 interface StoredNetWorthData {
     targetAmount?: number; // Optional target

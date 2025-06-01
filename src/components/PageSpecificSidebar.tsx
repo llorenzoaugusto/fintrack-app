@@ -1,6 +1,6 @@
 import React from 'react';
-import { AppView } from '../types';
-import { NAV_ITEMS, APP_NAME } from '../constants';
+import { AppView } from '@/types';
+import { NAV_ITEMS, APP_NAME } from '@/constants';
 
 interface PageSpecificSidebarProps {
   currentView: AppView;

@@ -1,12 +1,12 @@
 import React, { useState, useMemo } from 'react';
-import { Transaction, ProjectedBalance, AppView, TransactionType } from '../types';
-import { CURRENCY_SYMBOL, PROJECTION_DAYS, BALANCE_COLORS, FINTRACK_TEXT_COLOR_SECONDARY, FINTRACK_TEXT_COLOR_MUTED, FINTRACK_TEXT_COLOR_PRIMARY, FINTRACK_BACKGROUND_MUTED, FINTRACK_BORDER_COLOR } from '../constants';
-import { calculateProjections, calculateCurrentActualBalance } from '../services/projectionService';
-import ProjectionChart from '../components/ProjectionChart'; // Will be adapted for simpler chart
-import Button from '../components/Button';
-import Input from '../components/Input'; // For daily spending if needed directly
-import TransactionForm from '../components/TransactionForm';
-import Modal from '../components/Modal';
+import { Transaction, ProjectedBalance, AppView, TransactionType } from '@/types';
+import { CURRENCY_SYMBOL, PROJECTION_DAYS, BALANCE_COLORS, FINTRACK_TEXT_COLOR_SECONDARY, FINTRACK_TEXT_COLOR_MUTED, FINTRACK_TEXT_COLOR_PRIMARY, FINTRACK_BACKGROUND_MUTED, FINTRACK_BORDER_COLOR } from '@/constants';
+import { calculateProjections, calculateCurrentActualBalance } from '@/services/projectionService';
+import ProjectionChart from '@/components/ProjectionChart'; // Will be adapted for simpler chart
+import Button from '@/components/Button';
+import Input from '@/components/Input'; // For daily spending if needed directly
+import TransactionForm from '@/components/TransactionForm';
+import Modal from '@/components/Modal';
 
 interface DashboardPageProps {
   transactions: Transaction[];

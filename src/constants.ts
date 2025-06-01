@@ -1,4 +1,4 @@
-import { AppView } from './types';
+import { AppView } from '@/types';
 
 export const APP_NAME = "FinTrack";
 export const PROJECTION_DAYS = 90; // Number of days to project into the future
