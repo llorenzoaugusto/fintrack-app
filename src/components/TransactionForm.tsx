@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Transaction, TransactionType } from '../types';
-import Button from './Button';
-import Input from './Input';
-import Select from './Select';
+import { Transaction, TransactionType } from '@/types';
+import Button from '@/components/Button';
+import Input from '@/components/Input';
+import Select from '@/components/Select';
 
 interface TransactionFormProps {
   onSubmit: (transaction: Transaction) => void;

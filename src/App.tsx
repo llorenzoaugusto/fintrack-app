@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { HashRouter, Routes, Route, Navigate } from 'react-router-dom';
-import { Transaction, AppView } from './types';
-import { useLocalStorage } from './hooks/useLocalStorage';
-import { NAV_ITEMS } from './constants';
+import { Transaction, AppView } from '@/types';
+import { useLocalStorage } from '@/hooks/useLocalStorage';
+import { NAV_ITEMS } from '@/constants';
 
-import Header from './components/Header';
+import Header from '@/components/Header';
 // NavItem is no longer used directly by App.tsx for a sidebar
-import DashboardPage from './pages/DashboardPage';
-import TransactionsPage from './pages/TransactionsPage';
-import EmergencyFundPage from './pages/EmergencyFundPage';
-import NetWorthPage from './pages/NetWorthPage';
-import SettingsPage from './pages/SettingsPage';
+import DashboardPage from '@/pages/DashboardPage';
+import TransactionsPage from '@/pages/TransactionsPage';
+import EmergencyFundPage from '@/pages/EmergencyFundPage';
+import NetWorthPage from '@/pages/NetWorthPage';
+import SettingsPage from '@/pages/SettingsPage';
 
 // Placeholder Pages
 const PlaceholderPage: React.FC<{ title: string }> = ({ title }) => (

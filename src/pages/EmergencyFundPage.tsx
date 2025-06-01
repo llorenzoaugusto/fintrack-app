@@ -1,11 +1,11 @@
 import React, { useState, useMemo } from 'react';
-import { FinancialGoal, FundContribution } from '../types';
-import { useLocalStorage } from '../hooks/useLocalStorage';
-import Button from '../components/Button';
-import Input from '../components/Input';
-import Modal from '../components/Modal';
-import { CURRENCY_SYMBOL, FINTRACK_TEXT_COLOR_PRIMARY, FINTRACK_TEXT_COLOR_SECONDARY, FINTRACK_TEXT_COLOR_MUTED, FINTRACK_BORDER_COLOR, FINTRACK_BACKGROUND_MUTED } from '../constants';
-import { formatDisplayDate } from '../utils/dateUtils';
+import { FinancialGoal, FundContribution } from '@/types';
+import { useLocalStorage } from '@/hooks/useLocalStorage';
+import Button from '@/components/Button';
+import Input from '@/components/Input';
+import Modal from '@/components/Modal';
+import { CURRENCY_SYMBOL, FINTRACK_TEXT_COLOR_PRIMARY, FINTRACK_TEXT_COLOR_SECONDARY, FINTRACK_TEXT_COLOR_MUTED, FINTRACK_BORDER_COLOR, FINTRACK_BACKGROUND_MUTED } from '@/constants';
+import { formatDisplayDate } from '@/utils/dateUtils';
 
 const EmergencyFundPage: React.FC = () => {
   const [goal, setGoal] = useLocalStorage<FinancialGoal>('emergencyFundGoal_v3_fintrack', {

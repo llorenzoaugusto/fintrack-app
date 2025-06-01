@@ -1,7 +1,7 @@
 import React from 'react';
-import { ProjectedBalance } from '../types';
-import { CURRENCY_SYMBOL, BALANCE_COLORS, FINTRACK_TEXT_COLOR_MUTED, FINTRACK_TEXT_COLOR_SECONDARY, FINTRACK_BORDER_COLOR } from '../constants';
-import { formatDisplayDate } from '../../utils/dateUtils';
+import { ProjectedBalance } from '@/types';
+import { CURRENCY_SYMBOL, BALANCE_COLORS, FINTRACK_TEXT_COLOR_MUTED, FINTRACK_TEXT_COLOR_SECONDARY, FINTRACK_BORDER_COLOR } from '@/constants';
+import { formatDisplayDate } from '@/utils/dateUtils';
 
 interface ProjectionTableProps {
   projections: ProjectedBalance[];
@@ -13,9 +13,6 @@ const ProjectionTable: React.FC<ProjectionTableProps> = ({ projections }) => {
   }
 
   const getBalanceColorClass = (balance: number) => {
-  // Apply 'positive' color for balances significantly above zero (e.g., > 100),
-  // 'neutral' for zero or moderately positive balances (0-100), and 'negative' for below zero.
-  // This threshold (100) is a specific UI design choice.
     if (balance > 100) return BALANCE_COLORS.positive;
     if (balance >= 0) return BALANCE_COLORS.neutral; // Or a less prominent positive
     return BALANCE_COLORS.negative;

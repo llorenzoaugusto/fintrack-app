@@ -1,6 +1,6 @@
 
-import { Transaction, ProjectedBalance, TransactionType } from '../types';
-import { PROJECTION_DAYS } from '../constants';
+import { Transaction, ProjectedBalance, TransactionType } from '@/types';
+import { PROJECTION_DAYS } from '@/constants';
 
 const formatDate = (date: Date): string => {
   return date.toISOString().split('T')[0];

@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { useLocalStorage } from '../hooks/useLocalStorage';
-import Button from '../components/Button';
-import Input from '../components/Input';
-import Select from '../components/Select'; // For currency, date format etc.
-import { CURRENCY_SYMBOL, FINTRACK_TEXT_COLOR_PRIMARY, FINTRACK_TEXT_COLOR_SECONDARY, FINTRACK_TEXT_COLOR_MUTED, FINTRACK_BORDER_COLOR } from '../constants';
+import { useLocalStorage } from '@/hooks/useLocalStorage';
+import Button from '@/components/Button';
+import Input from '@/components/Input';
+import Select from '@/components/Select'; // For currency, date format etc.
+import { CURRENCY_SYMBOL, FINTRACK_TEXT_COLOR_PRIMARY, FINTRACK_TEXT_COLOR_SECONDARY, FINTRACK_TEXT_COLOR_MUTED, FINTRACK_BORDER_COLOR } from '@/constants';
 
 interface SettingsPageProps {
   dailySpending: number;

@@ -1,11 +1,11 @@
 import React, { useState, useMemo } from 'react';
-import { Transaction, TransactionType, AppView } from '../types';
-import TransactionForm from '../components/TransactionForm';
-import Modal from '../components/Modal';
+import { Transaction, TransactionType, AppView } from '@/types';
+import TransactionForm from '@/components/TransactionForm';
+import Modal from '@/components/Modal';
 // Button, Input, Select might be used in modal or future filters
-import { CURRENCY_SYMBOL } from '../constants';
-import PageSpecificSidebar from '../components/PageSpecificSidebar'; // Import the new sidebar
-import { formatDisplayDate } from '../utils/dateUtils';
+import { CURRENCY_SYMBOL } from '@/constants';
+import PageSpecificSidebar from '@/components/PageSpecificSidebar'; // Import the new sidebar
+import { formatDisplayDate } from '@/utils/dateUtils';
 
 interface TransactionsPageProps {
   transactions: Transaction[];

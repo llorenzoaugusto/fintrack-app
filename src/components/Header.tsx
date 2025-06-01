@@ -1,6 +1,6 @@
 import React from 'react';
-import { APP_NAME, NAV_ITEMS } from '../constants';
-import { AppView } from '../types';
+import { APP_NAME, NAV_ITEMS } from '@/constants';
+import { AppView } from '@/types';
 
 interface HeaderProps {
   currentView: AppView;
