@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FinTrack</title>
+    <link crossorigin="" href="https://fonts.gstatic.com/" rel="preconnect"/>
+    <link as="style" href="https://fonts.googleapis.com/css2?display=swap&family=Inter:wght@400;500;700;900&family=Noto+Sans:wght@400;500;700;900" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet"/>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <!-- Font Awesome is still used by some components, will be phased out or replaced -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  <script type="importmap">
+{
+  "imports": {
+    "react-dom/": "https://esm.sh/react-dom@^19.1.0/",
+    "react/": "https://esm.sh/react@^19.1.0/",
+    "react": "https://esm.sh/react@^19.1.0",
+    "recharts": "https://esm.sh/recharts@^2.15.3",
+    "react-router-dom": "https://esm.sh/react-router-dom@^7.6.1"
+  }
+}
+</script>
+<style>
+  body {
+    font-family: 'Inter', 'Noto Sans', sans-serif;
+    background-color: #f9fafb; /* bg-gray-50 */
+  }
+</style>
+<link rel="stylesheet" href="/index.css">
+</head>
+  <body class="bg-gray-50"> {/* Updated body class */}
+    <div id="root" class="relative flex size-full min-h-screen flex-col group/design-root overflow-x-hidden"></div> {/* Ensure group/design-root is here if needed by Tailwind sub-plugins, but body is main bg now */}
+    <script type="module" src="/index.tsx"></script>
+  </body>
+</html>
