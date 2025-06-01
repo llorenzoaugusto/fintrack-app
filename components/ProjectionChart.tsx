@@ -2,7 +2,7 @@ import React from 'react';
 import { AreaChart, Area, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { ProjectedBalance } from '../types';
 import { CURRENCY_SYMBOL, CHART_COLORS } from '../constants';
-import { formatDisplayDate } from '../../utils/dateUtils';
+import { formatDisplayDate } from '../utils/dateUtils';
 
 interface ProjectionChartProps {
   projections: ProjectedBalance[];
