@@ -7,7 +7,7 @@ import Modal from '../components/Modal';
 import Select from '../components/Select';
 import { AreaChart, Area, LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, Cell, PieChart, Pie } from 'recharts';
 import { CURRENCY_SYMBOL, FINTRACK_TEXT_COLOR_PRIMARY, FINTRACK_TEXT_COLOR_SECONDARY, FINTRACK_TEXT_COLOR_MUTED, FINTRACK_BORDER_COLOR, CHART_COLORS } from '../constants';
-
+import { formatDisplayDate } from '../utils/dateUtils';
 
 interface StoredNetWorthData {
     targetAmount?: number; // Optional target
@@ -89,11 +89,6 @@ const NetWorthPage: React.FC = () => {
       }));
     }
   };
-  
-  const formatDate = (dateString: string) => {
-     const date = new Date(dateString + 'T00:00:00');
-    return date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
-  };
 
   // Dummy data for performance chart
   const performanceData = useMemo(() => {
@@ -110,7 +105,7 @@ const NetWorthPage: React.FC = () => {
         } else {
             currentValue -= tx.amount; // Simplified
         }
-        const monthYear = new Date(tx.date  + 'T00:00:00').toLocaleDateString('en-US', {year: 'numeric', month: 'short'});
+        const monthYear = formatDisplayDate(tx.date, 'monthYearOnly');
         monthlySnapshots[monthYear] = currentValue;
     });
     
@@ -118,16 +113,17 @@ const NetWorthPage: React.FC = () => {
     const baseDate = new Date();
     baseDate.setMonth(baseDate.getMonth() - 5); // Start 6 months ago
     for(let i = 0; i < 6; i++) {
-        const dateKey = baseDate.toLocaleDateString('en-US', {year: 'numeric', month: 'short'});
+        const dateKey = formatDisplayDate(baseDate.toISOString().split('T')[0], 'monthYearOnly');
         chartData.push({
-            name: baseDate.toLocaleDateString('en-US', {month: 'short'}),
+            name: formatDisplayDate(baseDate.toISOString().split('T')[0], 'shortMonthOnly'),
             value: monthlySnapshots[dateKey] || (chartData[i-1]?.value || 0) // Carry forward if no data for month
         });
         baseDate.setMonth(baseDate.getMonth() + 1);
     }
     // Add current value as last point if more recent than last snapshot
     const lastSnapshotMonth = chartData[chartData.length-1]?.name;
-    const currentMonth = new Date().toLocaleDateString('en-US', {month: 'short'});
+    const currentFormattedDate = new Date().toISOString().split('T')[0];
+    const currentMonth = formatDisplayDate(currentFormattedDate, 'shortMonthOnly');
     if(lastSnapshotMonth !== currentMonth && netWorthData.transactions.length > 0) { // Ensure there are transactions before adding current month
         chartData.push({name: currentMonth, value: currentValue});
     }
@@ -234,7 +230,7 @@ const NetWorthPage: React.FC = () => {
                 <tbody>
                   {netWorthData.transactions.slice(0, 5).map(tx => ( // Show last 5
                     <tr key={tx.id} className={`border-b ${FINTRACK_BORDER_COLOR} last:border-b-0 hover:bg-slate-50`}>
-                      <td className={`py-3 px-3 text-sm ${FINTRACK_TEXT_COLOR_SECONDARY}`}>{formatDate(tx.date)}</td>
+                      <td className={`py-3 px-3 text-sm ${FINTRACK_TEXT_COLOR_SECONDARY}`}>{formatDisplayDate(tx.date, 'shortWithYear')}</td>
                       <td className={`py-3 px-3 text-sm ${tx.type === InvestmentTransactionType.BUY ? 'text-green-600' : 'text-red-600'}`}>{tx.type}</td>
                       <td className={`py-3 px-3 text-sm font-medium ${FINTRACK_TEXT_COLOR_PRIMARY}`}>{tx.asset}</td>
                       <td className={`py-3 px-3 text-sm text-right ${FINTRACK_TEXT_COLOR_SECONDARY}`}>{tx.quantity.toFixed(2)}</td>
