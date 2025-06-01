@@ -13,6 +13,9 @@ const ProjectionTable: React.FC<ProjectionTableProps> = ({ projections }) => {
   }
 
   const getBalanceColorClass = (balance: number) => {
+  // Apply 'positive' color for balances significantly above zero (e.g., > 100),
+  // 'neutral' for zero or moderately positive balances (0-100), and 'negative' for below zero.
+  // This threshold (100) is a specific UI design choice.
     if (balance > 100) return BALANCE_COLORS.positive;
     if (balance >= 0) return BALANCE_COLORS.neutral; // Or a less prominent positive
     return BALANCE_COLORS.negative;
