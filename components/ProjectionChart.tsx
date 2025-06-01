@@ -2,6 +2,7 @@ import React from 'react';
 import { AreaChart, Area, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { ProjectedBalance } from '../types';
 import { CURRENCY_SYMBOL, CHART_COLORS } from '../constants';
+import { formatDisplayDate } from '../../utils/dateUtils';
 
 interface ProjectionChartProps {
   projections: ProjectedBalance[];
@@ -13,11 +14,6 @@ const ProjectionChart: React.FC<ProjectionChartProps> = ({ projections, simpleMo
     return <div className="flex items-center justify-center h-full text-slate-500">No data for chart.</div>;
   }
   
-  const formatDateForChart = (dateString: string) => {
-     const date = new Date(dateString + 'T00:00:00'); // Ensure date is parsed as local
-     return date.toLocaleDateString('en-US', { month: 'short' }); // FinTrack uses Jan, Feb, Mar
-  };
-  
   // For simple mode, we might want to show fewer ticks or aggregate data by month
   // For now, we'll use all data points but simplify the visual presentation.
   // Aggregate data by month for the simple chart if many data points exist
@@ -25,7 +21,7 @@ const ProjectionChart: React.FC<ProjectionChartProps> = ({ projections, simpleMo
     if (simpleMode && projections.length > 30) { // Aggregate if more than 30 days
         const monthlyData: { [key: string]: { name: string, SaldoProjetado: number, count: number } } = {};
         projections.forEach(p => {
-            const monthYear = formatDateForChart(p.date);
+            const monthYear = formatDisplayDate(p.date, 'monthYearOnly');
             if (!monthlyData[monthYear]) {
                 monthlyData[monthYear] = { name: monthYear, SaldoProjetado: 0, count: 0 };
             }
@@ -37,11 +33,11 @@ const ProjectionChart: React.FC<ProjectionChartProps> = ({ projections, simpleMo
             // Average balance for the month, or last day's balance might be better.
             // For simplicity, let's use the sum now, which isn't ideal for balance.
             // Let's take the balance of the first entry for that month for simplicity of aggregation
-            SaldoProjetado: projections.find(p => formatDateForChart(p.date) === m.name)?.balance || 0,
+            SaldoProjetado: projections.find(p => formatDisplayDate(p.date, 'monthYearOnly') === m.name)?.balance || 0,
         })).slice(0, 3); // Show roughly 3 months
     } else {
        dataForChart = projections.map(p => ({
-        name: new Date(p.date + 'T00:00:00').toLocaleDateString('pt-BR', { day: 'numeric', month: 'short' }),
+        name: formatDisplayDate(p.date, 'dayMonthShort'),
         SaldoProjetado: p.balance,
       }));
     }

@@ -5,6 +5,7 @@ import Modal from '../components/Modal';
 // Button, Input, Select might be used in modal or future filters
 import { CURRENCY_SYMBOL } from '../constants';
 import PageSpecificSidebar from '../components/PageSpecificSidebar'; // Import the new sidebar
+import { formatDisplayDate } from '../utils/dateUtils';
 
 interface TransactionsPageProps {
   transactions: Transaction[];
@@ -86,11 +87,6 @@ const TransactionsPage: React.FC<TransactionsPageProps> = ({
   const totalPages = Math.ceil(filteredAndSortedTransactions.length / ITEMS_PER_PAGE);
   const totalResults = filteredAndSortedTransactions.length;
 
-  const formatDate = (dateString: string) => {
-    const date = new Date(dateString + 'T00:00:00'); 
-    return date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: '2-digit' });
-  };
-  
   const getCategoryColorClasses = (category?: string, type?: TransactionType): string => {
     if (type === TransactionType.INCOME && (!category || category.toLowerCase() === 'income')) {
         return 'bg-green-100 text-green-800';
@@ -192,7 +188,7 @@ const TransactionsPage: React.FC<TransactionsPageProps> = ({
                 <tbody className="divide-y divide-gray-200">
                   {paginatedTransactions.map((transaction) => (
                     <tr key={transaction.id} className="hover:bg-gray-50 transition-colors">
-                      <td className="px-4 py-3 text-sm text-gray-600 whitespace-nowrap">{formatDate(transaction.date)}</td>
+                      <td className="px-4 py-3 text-sm text-gray-600 whitespace-nowrap">{formatDisplayDate(transaction.date, 'shortWithYear')}</td>
                       <td className="px-4 py-3 text-sm text-gray-900 font-medium whitespace-nowrap">{transaction.description}</td>
                       <td className="px-4 py-3 whitespace-nowrap">
                         {transaction.category ? (

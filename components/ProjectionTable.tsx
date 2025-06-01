@@ -1,6 +1,7 @@
 import React from 'react';
 import { ProjectedBalance } from '../types';
 import { CURRENCY_SYMBOL, BALANCE_COLORS, FINTRACK_TEXT_COLOR_MUTED, FINTRACK_TEXT_COLOR_SECONDARY, FINTRACK_BORDER_COLOR } from '../constants';
+import { formatDisplayDate } from '../../utils/dateUtils';
 
 interface ProjectionTableProps {
   projections: ProjectedBalance[];
@@ -10,11 +11,6 @@ const ProjectionTable: React.FC<ProjectionTableProps> = ({ projections }) => {
   if (!projections.length) {
     return <p className={FINTRACK_TEXT_COLOR_MUTED}>No projection data to display.</p>;
   }
-
-  const formatDate = (dateString: string) => {
-    const date = new Date(dateString + 'T00:00:00');
-    return date.toLocaleDateString('en-US', { day: '2-digit', month: 'short', year: 'numeric' });
-  };
 
   const getBalanceColorClass = (balance: number) => {
     if (balance > 100) return BALANCE_COLORS.positive;
@@ -37,7 +33,7 @@ const ProjectionTable: React.FC<ProjectionTableProps> = ({ projections }) => {
         <tbody className="bg-white divide-y divide-slate-200">
           {projections.map((item) => (
             <tr key={item.date} className="hover:bg-slate-50 transition-colors">
-              <td className={`px-4 py-3 whitespace-nowrap text-sm font-medium ${FINTRACK_TEXT_COLOR_SECONDARY}`}>{formatDate(item.date)}</td>
+              <td className={`px-4 py-3 whitespace-nowrap text-sm font-medium ${FINTRACK_TEXT_COLOR_SECONDARY}`}>{formatDisplayDate(item.date, 'shortWithYear')}</td>
               <td className={`px-4 py-3 whitespace-nowrap text-sm text-right ${item.incomes > 0 ? BALANCE_COLORS.positive : FINTRACK_TEXT_COLOR_SECONDARY}`}>
                 {CURRENCY_SYMBOL}{item.incomes.toFixed(2)}
               </td>
