@@ -29,18 +29,9 @@ const DashboardPage: React.FC<DashboardPageProps> = ({
   const currentActualBalance = useMemo(() => calculateCurrentActualBalance(transactions), [transactions]);
   
   const projections: ProjectedBalance[] = useMemo(() => {
-    const today = new Date();
-    const yesterday = new Date(today);
-    yesterday.setDate(today.getDate() - 1);
-    const yesterdayStr = yesterday.toISOString().split('T')[0];
-
-    let initialBalanceForProjection = 0;
-    transactions.forEach(t => {
-        if (t.date <= yesterdayStr) {
-            initialBalanceForProjection += t.type === TransactionType.INCOME ? t.amount : -t.amount;
-        }
-    });
-    return calculateProjections(transactions, dailySpending, initialBalanceForProjection, new Date());
+    // The initialBalanceForProjection logic has been removed.
+    // calculateProjections now determines the starting balance from transactions before startDate.
+    return calculateProjections(transactions, dailySpending, new Date());
   }, [transactions, dailySpending]);
 
   const handleAddTransaction = (transaction: Transaction) => {

@@ -9,24 +9,18 @@ const formatDate = (date: Date): string => {
 export const calculateProjections = (
   transactions: Transaction[],
   dailySpending: number,
-  initialBalance: number = 0, // If not based on past transactions
+  // initialBalance parameter removed
   startDate: Date = new Date()
 ): ProjectedBalance[] => {
   const projections: ProjectedBalance[] = [];
-  let currentBalance = initialBalance;
+  // let currentBalance = initialBalance; // Old line
 
-  // Calculate actual current balance from past transactions if initialBalance is not explicitly set
-  // For this version, we'll consider transactions on or before 'startDate' to establish the starting point.
-  // A more robust way would be to have a dedicated "Initial Balance" entry.
-  // For now, let's sum up all transactions BEFORE the projection start date to get a starting balance.
-  const todayStr = formatDate(new Date());
-  
-  let effectiveInitialBalance = 0;
+  // Calculate balance from transactions strictly before the projection startDate
+  let balanceAtStartOfProjection = 0;
   transactions.filter(t => t.date < formatDate(startDate)).forEach(t => {
-    effectiveInitialBalance += t.type === TransactionType.INCOME ? t.amount : -t.amount;
+    balanceAtStartOfProjection += t.type === TransactionType.INCOME ? t.amount : -t.amount;
   });
-  currentBalance = effectiveInitialBalance;
-
+  let currentBalance = balanceAtStartOfProjection; // Initialize currentBalance correctly
 
   for (let i = 0; i < PROJECTION_DAYS; i++) {
     const projectionDate = new Date(startDate);
@@ -47,14 +41,10 @@ export const calculateProjections = (
     });
     
     // Apply transactions for the current day to the balance *before* deducting daily spending
-    // If it's the first day of projection (i.e., today), we use the calculated effectiveInitialBalance
+    // If it's the first day of projection (i.e., today), we use the calculated balanceAtStartOfProjection
     // and then apply today's transactions and daily spending.
-    if (i === 0) {
-         currentBalance = currentBalance + dailyIncomes - dailyExpenses - dailySpending;
-    } else {
-         currentBalance = currentBalance + dailyIncomes - dailyExpenses - dailySpending;
-    }
-    
+    // The balance calculation is the same regardless of i === 0 due to pre-calculation of balanceAtStartOfProjection
+    currentBalance = currentBalance + dailyIncomes - dailyExpenses - dailySpending;
 
     projections.push({
       date: dateStr,
